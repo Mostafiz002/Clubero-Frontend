@@ -13,7 +13,7 @@ const LatestClubs = () => {
   const { data: clubs = [], isLoading } = useQuery({
     queryKey: ["latest-clubs"],
     queryFn: async () => {
-      const res = await axios("/latest-clubs");
+      const res = await axios("/clubs/latest-clubs");
       return res.data;
     },
   });
