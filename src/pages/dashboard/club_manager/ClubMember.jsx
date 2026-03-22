@@ -21,17 +21,20 @@ const ClubMember = () => {
   } = useQuery({
     queryKey: ["club-members-manager", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure(`/manager/clubMembers?email=${user.email}`);
-      return res.data;
+      const res = await axiosSecure(
+        `/dashboard/manager/clubMembers?email=${user.email}`,
+      );
+      return res.data.data;
     },
     enabled: !!user?.email,
   });
 
   const handleStatus = (id, status) => {
     axiosSecure
-      .patch(`/club-member/status/${id}?status=${status}`)
+      .patch(`/dashboard/club-member/status/${id}?status=${status}`)
       .then((res) => {
-        if (res.data.modifiedCount) {
+        console.log(res);
+        if (res.status == 200) {
           refetch();
           toast.success(`Member status updated to ${status}`);
         }
@@ -204,7 +207,7 @@ const ClubMember = () => {
                                   {member.joinedAt
                                     ? format(
                                         new Date(member.joinedAt),
-                                        "MMM d, yyyy"
+                                        "MMM d, yyyy",
                                       )
                                     : "N/A"}
                                 </div>
@@ -216,7 +219,7 @@ const ClubMember = () => {
                                       member._id,
                                       member.status === "active"
                                         ? "expired"
-                                        : "active"
+                                        : "active",
                                     )
                                   }
                                   className={`p-2.5 rounded-xl transition-all shadow-sm ${

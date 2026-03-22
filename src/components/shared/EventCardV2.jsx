@@ -12,7 +12,7 @@ const EventCardV2 = ({ event }) => {
     queryKey: ["dashboard-club"],
     queryFn: async () => {
       const res = await axiosSecure(`/clubs/${event.clubId}`);
-      return res.data;
+      return res.data.data;
     },
   });
 

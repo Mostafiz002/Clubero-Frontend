@@ -22,9 +22,9 @@ const EventRegistrations = () => {
     queryKey: ["events-registered-members", user?.email],
     queryFn: async () => {
       const res = await axiosSecure(
-        `/manager/events/members?email=${user.email}`
+        `/dashboard/manager/events/members?email=${user.email}`,
       );
-      return res.data;
+      return res.data.data;
     },
     enabled: !!user?.email,
   });
@@ -45,7 +45,7 @@ const EventRegistrations = () => {
     >
       <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <div className="relative inline-block mt-6">
+          <div className="relative inline-block mt-4">
             <h2 className="heading">
               Event <span className="text-accent">Registration</span>
             </h2>
@@ -85,20 +85,7 @@ const EventRegistrations = () => {
           </p>
         </div>
         <div className="hidden md:block">
-          <svg
-            width="60"
-            height="25"
-            viewBox="0 0 60 25"
-            fill="none"
-            className="text-accent/30"
-          >
-            <path
-              d="M2 22C10 22 15 3 25 3C35 3 40 22 58 22"
-              stroke="currentColor"
-              strokeWidth="4"
-              strokeLinecap="round"
-            />
-          </svg>
+         
         </div>
       </div>
 
@@ -210,7 +197,7 @@ const EventRegistrations = () => {
                                     {member.registeredAt
                                       ? format(
                                           new Date(member.registeredAt),
-                                          "MMM dd, yyyy"
+                                          "MMM dd, yyyy",
                                         )
                                       : "N/A"}
                                   </div>

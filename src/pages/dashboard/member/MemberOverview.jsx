@@ -35,7 +35,7 @@ const MemberOverview = () => {
     queryKey: ["member-overview"],
     queryFn: async () => {
       const res = await axiosSecure("/dashboard/overview");
-      return res.data;
+      return res.data.data;
     },
   });
 
@@ -46,7 +46,7 @@ const MemberOverview = () => {
       const res = await axiosSecure.get(
         `/dashboard/upcoming-events?email=${user.email}`
       );
-      return res.data;
+      return res.data.data;
     },
   });
 

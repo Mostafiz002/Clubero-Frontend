@@ -14,7 +14,7 @@ const LatestClubs = () => {
     queryKey: ["latest-clubs"],
     queryFn: async () => {
       const res = await axios("/clubs/latest-clubs");
-      return res.data;
+      return res.data.data;
     },
   });
 

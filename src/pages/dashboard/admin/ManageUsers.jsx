@@ -18,7 +18,7 @@ const ManageUsers = () => {
     queryKey: ["admin-applied-users", user?.email, searchText],
     queryFn: async () => {
       const res = await axiosSecure.get(`/admin/cm-applied-users`);
-      return res.data;
+      return res.data.data;
     },
   });
   console.log(applications);
@@ -36,7 +36,7 @@ const ManageUsers = () => {
       const res = await axiosSecure.get(
         `/admin/users?searchText=${searchText}`
       );
-      return res.data;
+      return res.data.data;
     },
   });
 

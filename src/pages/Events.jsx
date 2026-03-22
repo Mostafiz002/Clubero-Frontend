@@ -14,7 +14,7 @@ const Events = () => {
     queryKey: ["all-events"],
     queryFn: async () => {
       const res = await axios("/events");
-      return res.data;
+      return res.data.data;
     },
   });
 
@@ -22,7 +22,7 @@ const Events = () => {
     queryKey: ["search-events", search],
     queryFn: async () => {
       const res = await axios(`/events?search=${search}`);
-      return res.data;
+      return res.data.data;
     },
   });
 

@@ -31,17 +31,23 @@ const EventManagement = () => {
     refetch,
   } = useQuery({
     queryKey: ["events-management-manager", user?.email],
+    enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/manager/events?email=${user.email}`);
-      return res.data;
+      const res = await axiosSecure.get(
+        `/dashboard/manager/events?email=${user.email}`,
+      );
+      return res.data.data;
     },
   });
 
   const { data: clubs = [] } = useQuery({
     queryKey: ["my-clubs-manager", user?.email],
+    enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/manager/clubs?email=${user.email}`);
-      return res.data;
+      const res = await axiosSecure.get(
+        `/dashboard/manager/clubs?email=${user.email}`,
+      );
+      return res.data.data;
     },
   });
 
@@ -51,14 +57,15 @@ const EventManagement = () => {
     }
 
     const eventInfo = {
-      isPaid: "no",
+      isPaid: false,
       ...data,
     };
 
     axiosSecure
       .post("/events", eventInfo)
       .then((res) => {
-        if (res.data.insertedId) {
+        console.log(res)
+        if (res.status == 201) {
           refetch();
           reset();
           setIsOpen(false);
@@ -158,7 +165,12 @@ const EventManagement = () => {
         className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-3 lg:grid-cols-4"
       >
         {events.map((event) => (
-          <EventCardManager event={event} refetch={refetch} clubs={clubs} />
+          <EventCardManager
+            key={event._id}
+            event={event}
+            refetch={refetch}
+            clubs={clubs}
+          />
         ))}
       </motion.div>
 

@@ -38,7 +38,7 @@ const AdminOverview = () => {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(`/dashboard/stats`);
-      return res.data;
+      return res.data.data;
     },
   });
 
@@ -96,7 +96,7 @@ const AdminOverview = () => {
   return (
     <div className="p-6 space-y-8 min-h-screen">
       <div className="relative">
-        <div className="relative inline-block mt-6">
+        <div className="relative inline-block mt-3">
           <h2 className="heading">
             Admin <span className="text-accent">Overview</span>
           </h2>

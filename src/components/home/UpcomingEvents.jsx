@@ -14,7 +14,7 @@ const UpcomingEvents = () => {
     queryKey: ["upcoming-events"],
     queryFn: async () => {
       const res = await axios("/events?limit=4");
-      return res.data;
+      return res.data.data;
     },
   });
 

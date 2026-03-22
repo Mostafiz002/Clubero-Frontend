@@ -27,7 +27,7 @@ const ClubDetails = () => {
     queryKey: ["club"],
     queryFn: async () => {
       const res = await axios(`/clubs/${id}`);
-      return res.data;
+      return res.data.data;
     },
   });
 
@@ -39,7 +39,7 @@ const ClubDetails = () => {
       const res = await axiosSecure(
         `/payments/email/club?email=${user.email}&clubId=${club._id}`
       );
-      return res.data;
+      return res.data.data;
     },
   });
   const isJoined = !!payment;
@@ -100,7 +100,7 @@ const ClubDetails = () => {
               "/payment-checkout-session",
               paymentInfo
             );
-            window.location.assign(res.data.url);
+            window.location.assign(res.data.data.url);
           }
         } catch {
           Swal.fire({

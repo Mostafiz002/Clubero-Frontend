@@ -14,7 +14,7 @@ const Transactions = () => {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get("/admin/payments");
-      return res.data;
+      return res.data.data;
     },
   });
 

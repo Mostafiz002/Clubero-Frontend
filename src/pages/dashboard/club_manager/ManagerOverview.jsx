@@ -47,7 +47,7 @@ const ManagerOverview = () => {
     queryKey: ["manager-overview"],
     queryFn: async () => {
       const res = await axiosSecure("/dashboard/overview/manager");
-      return res.data;
+      return res.data.data;
     },
   });
 

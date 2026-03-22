@@ -33,15 +33,17 @@ const ManageClubsManager = () => {
   } = useQuery({
     queryKey: ["my-clubs-manager", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/manager/clubs?email=${user.email}`);
-      return res.data;
+      const res = await axiosSecure.get(
+        `/dashboard/manager/clubs?email=${user.email}`,
+      );
+      return res.data.data;
     },
   });
 
   const { mutateAsync: createClub, isPending } = useMutation({
     mutationFn: async (newClub) => {
       const res = await axiosSecure.post("/clubs", newClub);
-      return res.data;
+      return res.data.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -59,7 +61,7 @@ const ManageClubsManager = () => {
     onError: (error) => {
       toast.error(
         error?.response?.data?.message ||
-          "Error occurred while creating the club"
+          "Error occurred while creating the club",
       );
     },
   });
@@ -333,7 +335,7 @@ const ManageClubsManager = () => {
 
                 <button
                   type="submit"
-                  disabled={isPending} 
+                  disabled={isPending}
                   className={`bg-green-500 text-white px-4 py-2 rounded-md ${
                     isPending
                       ? "opacity-50 cursor-not-allowed"

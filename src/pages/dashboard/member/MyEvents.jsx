@@ -16,7 +16,7 @@ const MyEvents = () => {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(`/dashboard/myEvents?email=${user.email}`);
-      return res.data;
+      return res.data.data;
     },
   });
 

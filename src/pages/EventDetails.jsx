@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import useAxios from "../hooks/useAxios";
 import { useLocation, useNavigate, useParams } from "react-router";
@@ -19,12 +19,13 @@ const EventDetails = () => {
   const { user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { data: event = {}, isLoading } = useQuery({
     queryKey: ["event-details", id],
     queryFn: async () => {
       const res = await axios(`/events/${id}`);
-      return res.data;
+      return res.data.data;
     },
   });
 
@@ -33,9 +34,9 @@ const EventDetails = () => {
     enabled: !!id && !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure(
-        `/eventRegistration/${id}?email=${user.email}`
+        `/eventRegistration/${id}?email=${user.email}`,
       );
-      return res.data;
+      return res.data.data;
     },
   });
   const isJoined = !!eventRegister;
@@ -44,7 +45,7 @@ const EventDetails = () => {
     queryKey: ["club"],
     queryFn: async () => {
       const res = await axios(`/clubs/${event.clubId}`);
-      return res.data;
+      return res.data.data;
     },
   });
 
@@ -56,9 +57,9 @@ const EventDetails = () => {
     }
 
     axiosSecure(
-      `/membership/club?email=${user?.email}&clubId=${event.clubId}`
+      `/membership/club?email=${user?.email}&clubId=${event.clubId}`,
     ).then((res) => {
-      if (res.data.clubId === event.clubId) {
+      if (res.data.data.clubId === event.clubId) {
         const eventInfo = {
           clubId: event.clubId,
           eventId: event._id,
@@ -89,9 +90,15 @@ const EventDetails = () => {
         }).then((result) => {
           if (result.isConfirmed) {
             try {
-              axiosSecure.post("/eventRegistration", eventInfo);
-              navigate("/dashboard/my-clubs");
-              toast.success("Successfully joined the event");
+              axiosSecure
+                .post("/eventRegistration", eventInfo)
+                .then(async () => {
+                  await queryClient.invalidateQueries({
+                    queryKey: ["my-events-member", user?.email],
+                  });
+                  navigate("/dashboard/my-events");
+                  toast.success("Successfully joined the event");
+                });
             } catch {
               Swal.fire({
                 icon: "error",

@@ -18,7 +18,7 @@ const ManageClubsAdmin = () => {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get("/admin/clubs");
-      return res.data;
+      return res.data.data;
     },
   });
 
@@ -27,7 +27,7 @@ const ManageClubsAdmin = () => {
     axiosSecure
       .patch(`/admin/status/${id}?status=${status}`)
       .then((data) => {
-        if (data.data.modifiedCount) {
+        if (data.status == 200) {
           toast.success(`Club ${status}`);
           refetch();
         }
@@ -109,12 +109,12 @@ const ManageClubsAdmin = () => {
                 <td>{club.managerEmail}</td>
                 <td>
                   <span
-                    className={`badge ${
+                    className={`capitalize badge ${
                       club.status === "approved"
                         ? "badge-success"
                         : club.status === "pending"
-                        ? "badge-warning"
-                        : "badge-error"
+                          ? "badge-warning"
+                          : "badge-error"
                     }`}
                   >
                     {club.status}
@@ -126,7 +126,13 @@ const ManageClubsAdmin = () => {
                 <td>{club.totalEvents}</td>
 
                 {/* Actions */}
-                <td className="flex gap-2 text-green-500 justify-center">
+                <td
+                  className={`flex gap-2 capitalize font-medium justify-center ${
+                    club.status === "approved"
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
                   {club.status === "pending" ? (
                     <>
                       <button

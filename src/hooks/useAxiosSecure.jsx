@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 const axiosInstance = axios.create({
-  baseURL: "https://clubero-api-server.vercel.app/api/v1",
+  baseURL: "http://localhost:3000/api/v1",
 });
 
 const useAxiosSecure = () => {

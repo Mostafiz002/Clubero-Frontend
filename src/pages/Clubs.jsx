@@ -22,7 +22,7 @@ const Clubs = () => {
     queryKey: ["all-clubs", sort],
     queryFn: async () => {
       const res = await axios(`/clubs?sort=${sort}`);
-      return res.data;
+      return res.data.data;
     },
   });
 
@@ -30,7 +30,7 @@ const Clubs = () => {
     queryKey: ["search-clubs", search, sort],
     queryFn: async () => {
       const res = await axios(`/clubs?search=${search}&sort=${sort}`);
-      return res.data;
+      return res.data.data;
     },
   });
 

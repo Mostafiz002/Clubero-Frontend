@@ -41,7 +41,7 @@ const MyClubs = () => {
       const res = await axiosSecure.get(
         `/dashboard/myClubs?email=${user.email}`
       );
-      return res.data;
+      return res.data.data;
     },
   });
 

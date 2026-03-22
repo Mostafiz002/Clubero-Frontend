@@ -13,29 +13,31 @@ import {
 import { FiArrowRight, FiCheck } from "react-icons/fi";
 import useRole from "../hooks/useRole";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-import useAuth from "../hooks/useAuth";
+// import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 
 const ClubCreatorProgram = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const { role } = useRole();
   const isPrivileged = role === "admin" || role === "club-manager";
 
-  const handleBecomeCM = () => {
-    axiosSecure
-      .patch(`/become-club-manager?email=${user?.email}`)
-      .then((data) => {
-        if (data.data.modifiedCount) {
-          toast.success(
-            "Application submitted! Our team will review it shortly."
-          );
-        }
-      })
-      .catch(() => {
-        toast.error("Failed to submit application.");
-      });
-  };
+const handleBecomeCM = () => {
+  axiosSecure
+    .patch(`/become-club-manager`)
+    .then((res) => {
+      console.log(res);
+
+      if (res.data.success) {
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message);
+      }
+    })
+    .catch(() => {
+      toast.error("Failed to submit application.");
+    });
+};
 
   const features = [
     {

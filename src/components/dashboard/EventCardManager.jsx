@@ -33,7 +33,8 @@ const EventCardManager = ({ event, clubs, refetch }) => {
     axiosSecure
       .patch(`/events/${event._id}`, data)
       .then((res) => {
-        if (res.data.modifiedCount) {
+        console.log(res)
+        if (res.status == 200) {
           Swal.fire({
             title: "Event updated!",
             icon: "success",
@@ -42,6 +43,7 @@ const EventCardManager = ({ event, clubs, refetch }) => {
           refetch();
           setIsOpen(false);
         }
+        
       })
       .catch(() => {
         toast.error("Error occurred while updating the club");
@@ -58,11 +60,13 @@ const EventCardManager = ({ event, clubs, refetch }) => {
       cancelButtonColor: "#3085d6",
       confirmButtonText: "Delete!",
     }).then((result) => {
+
       if (result.isConfirmed) {
         axiosSecure
           .delete(`/events/${event._id}`)
           .then((res) => {
-            if (res.data.deletedCount) {
+            console.log(res)
+            if (res.status == 200) {
               Swal.fire({
                 title: "Event deleted!",
                 icon: "success",

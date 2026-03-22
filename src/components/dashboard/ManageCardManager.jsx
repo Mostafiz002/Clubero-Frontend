@@ -32,7 +32,8 @@ const ManageCardManager = ({ club, refetch }) => {
     axiosSecure
       .patch(`/clubs/${club._id}`, data)
       .then((res) => {
-        if (res.data.modifiedCount) {
+        console.log(res)
+        if (res.status == 200) {
           Swal.fire({
             title: "Club updated!",
             icon: "success",
