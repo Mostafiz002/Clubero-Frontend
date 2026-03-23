@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000/api/v1",
+  baseURL: import.meta.env.VITE_BACKEND_URL,
 });
 
 const useAxios = () => {

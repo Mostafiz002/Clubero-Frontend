@@ -1,48 +1,89 @@
-# Clubero – Membership & Event Management for Local Clubs
+# 🚀 Clubero – Membership & Event Management Platform  
 
-[![Live Site](https://img.shields.io/badge/Live%20Site-https%3A%2F%2Fclubero.vercel.app-brightgreen)](https://clubero.vercel.app)
-[![Frontend](https://img.shields.io/badge/Frontend-GitHub-blue)](https://github.com/Mostafiz002/Clubero-Frontend)
-[![Backend](https://img.shields.io/badge/Backend-GitHub-darkblue)](https://github.com/Mostafiz002/Clubero-Backend)
+## 📂 Project Links  
 
-**Clubero** is a full-stack web application that allows users to discover, join, and manage local clubs and events. Club managers can create and manage clubs, set membership fees, organize events, and track members. Members can browse clubs, pay fees, register for events, and manage their memberships. An admin oversees the entire platform.
+- 🔗 Live: https://clubero.vercel.app/  
+- 🔗 Backend: https://github.com/Mostafiz002/Clubero-Backend 
+- 🔗 Frontend: https://github.com/Mostafiz002/Clubero-Frontend  
 
-### Key Features
-- User authentication with Firebase (Email/Password + Google Sign-in)
-- Role-based access (Member, Club Manager, Admin)
-- Club creation & management (with admin approval)
-- Membership system (Free or Paid with Stripe integration)
-- Event creation & registration (Free for clubmembers)
-- Secure payment processing with Stripe (Test Mode)
-- Role-based dashboards with TanStack Query & React Hook Form
-- Search & Filter for clubs and events
-- Responsive design with animations (Framer Motion)
-- Secure JWT & Firebase token verification
-- Server-side sorting & pagination
-- Loading skeletons, toast notifications, and modern UI with DaisyUI + Tailwind CSS
+---
 
-### Technologies Used
-#### Frontend
-- React.js (Vite)
-- React Router v6
-- React Hook Form
-- TanStack Query (React Query)
-- Tailwind CSS + DaisyUI
-- Framer Motion (animations)
-- Firebase Authentication
-- Stripe (Checkout)
-- Axios (API calls)
-- React Hot Toast
-- React Icons
+## 📌 Overview  
 
-#### Backend
-- Node.js + Express.js
-- MongoDB (Mongoose)
-- Stripe API
-- Firebase Admin SDK (token verification)
-- JWT (optional)
-- dotenv (environment variables)
-- CORS
-- Vercel deployment
+**Clubero** is a full-stack web application that allows users to **discover, join, and manage local clubs and events**. Members can explore clubs, join memberships, and register for events. Club Managers can create clubs, manage members, and organize events. Admins oversee and control the entire platform  
 
-### Live Site
-https://clubero.vercel.app/
+---
+
+## ✨ Features  
+
+### ⚙️ Backend  
+- 🔒 Secure API with JWT & Firebase Admin verification  
+- 🧠 Structured MongoDB schema using Mongoose  
+- ✅ Request validation using Zod  
+- ⚠️ Centralized error handling (Global Error Handler + AppError)  
+- 🔄 Async error handling using catchAsync  
+- 📦 Standardized API responses using sendResponse 
+- 🏢 Club creation, approval, and management system  
+- 💳 Membership system (Free & Paid with Stripe integration)  
+- 🎟️ Event creation & registration system  
+- 📄 Server-side filtering, sorting & pagination and Dashboard Apis 
+
+---
+
+### 🎨 Frontend  
+- 🔐 Firebase Authentication (Email/Password + Google Sign-in)  
+- 👥 Role-based UI (Member / Club Manager / Admin)  
+- 📊 Dynamic dashboards using TanStack Query  
+- 📝 Forms with React Hook Form  
+- 🔍 Search & filtering for clubs and events  
+- ⚡ Real-time UI updates  
+- 🎨 Responsive UI with Tailwind CSS + DaisyUI  
+- 🎬 Smooth animations with Framer Motion  
+- 🔔 Toast notifications for user feedback 
+
+---
+
+## 🛠️ Tech Stack  
+
+### ⚙️ Backend  
+- Node.js + Express.js  
+- TypeScript  
+- MongoDB + Mongoose  
+- Zod (Validation)  
+- Firebase Admin SDK  
+- JWT Authentication  
+- Stripe API  
+- Global Error Handling  
+- dotenv, CORS   
+
+---
+
+### 🎨 Frontend  
+- React.js (Vite)  
+- React Router v6  
+- React Hook Form  
+- TanStack Query (React Query)  
+- Tailwind CSS + DaisyUI  
+- Framer Motion  
+- Firebase Authentication  
+- Stripe Checkout  
+- Axios  
+- React Hot Toast  
+
+---
+
+## 🧠 Backend Refactor (Latest Update)  
+
+Originally, the backend was built in a **single `index.js` file**, which was not scalable or industry-standard.  
+
+The backend has now been completely restructured and upgraded:  
+
+- ✅ Migrated from **JavaScript → TypeScript**  
+- ✅ Introduced Mongoose for structured MongoDB schema management  
+- ✅ Implemented Zod validation for request data integrity  
+- ✅ Added Global Error Handler with custom `AppError`  
+- ✅ Used catchAsync to eliminate repetitive try-catch blocks  
+- ✅ Standardized responses using sendResponse utility
+- ✅ Refactored into a modular, scalable folder structure 
+
+---
